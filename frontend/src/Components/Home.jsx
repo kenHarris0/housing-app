@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../navBar.css";
 import "../Components/LoginRegister";
 
@@ -16,9 +17,11 @@ export default function Home() {
           </ul>
         </div>
         <div className="authentication">
-          <button className="auth" href="">
-            Login/Register
-          </button>
+          <Link to="/login">
+            <button className="auth" href="">
+              Login/Register
+            </button>
+          </Link>
         </div>
       </div>
     </div>
