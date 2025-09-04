@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/Navbar.css'
 function NavBar(){
     return(
@@ -7,7 +8,7 @@ function NavBar(){
                     <h4>Hotel Booking</h4>
                 </div>
                 <div className='loginBtn'>
-                    <button>Login</button>
+                    <p><strong><Link to="/signup" className='login'>Sign Up</Link></strong></p>
                 </div>
             </nav>
         </div>
