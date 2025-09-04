@@ -6,8 +6,22 @@ import "../loginregister.css";
 
 export default function LoginRegister() {
   const navigate = useNavigate();
+  const [signup, setSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+
+  const handleSignup = () => {
+    setSignup(!signup);
+  };
+
+  const handleRegister = () => {
+    if (email && password && phonenumber && name) {
+      alert("Registered Successfully!");
+      navigate("/");
+    }
+  };
 
   const handleLogin = () => {
     if (email && password) {
@@ -16,9 +30,69 @@ export default function LoginRegister() {
     }
   };
 
-  return (
+  return signup ? (
     <div>
       <div className="login-container">
+        <button
+          onClick={handleSignup}
+          style={{
+            background: "none",
+            border: "none",
+            color: "blue",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+        >
+          Already a Customer, Login!
+        </button>
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          value={name}
+          placeholder="Enter your name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label htmlFor="username">Email</label>
+        <input
+          type="email"
+          value={email}
+          placeholder="Enter the email address"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          value={password}
+          placeholder="Enter password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label htmlFor="phone-number">Phone Number</label>
+        <input
+          type="number"
+          value={phonenumber}
+          placeholder="Enter Phone Number"
+          onChange={(e) => setPhonenumber(e.target.value)}
+        />
+        <button className="login-btn" onClick={() => handleRegister()}>
+          Submit
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <div className="login-container">
+        <button
+          onClick={handleSignup}
+          style={{
+            background: "none",
+            border: "none",
+            color: "blue",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+        >
+          New Here, Register!
+        </button>
         <label htmlFor="username">UserName</label>
         <input
           type="email"
