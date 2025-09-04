@@ -35,7 +35,7 @@ export default function LoginRegister() {
       }
     } catch (err) {
       if (err.response && err.response.data.message) {
-        alert(err.response.data.message); // show backend error message
+        alert(err.response.data.message);
       } else {
         alert("Something went wrong. Please try again.");
       }
