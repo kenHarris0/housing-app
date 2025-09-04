@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import axios from "axios";
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Home from "./Home";
@@ -16,17 +17,55 @@ export default function LoginRegister() {
     setSignup(!signup);
   };
 
-  const handleRegister = () => {
-    if (email && password && phonenumber && name) {
-      alert("Registered Successfully!");
-      navigate("/");
+  const handleRegister = async () => {
+    try {
+      if (email && password && phonenumber && name) {
+        const res = await axios.post(
+          "http://localhost:5000/login/registeruser",
+          {
+            name,
+            email,
+            password,
+            phonenumber,
+          }
+        );
+        alert("Registered Successfully!");
+        console.log(res.data);
+        navigate("/");
+      }
+    } catch (err) {
+      if (err.response && err.response.data.message) {
+        alert(err.response.data.message); // show backend error message
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+      console.error("Login Error:", err);
+      setName("");
+      setEmail("");
+      setPhonenumber("");
+      setPassword("");
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-      console.log("Logged in Successfully!");
-      navigate("/");
+      try {
+        const res = await axios.post("http://localhost:5000/login/loginuser", {
+          email,
+          password,
+        });
+        console.log("Logged in Successfully!");
+        console.log(res.data);
+        navigate("/");
+      } catch (err) {
+        if (err.response && err.response.data.message) {
+          alert(err.response.data.message); // show backend error message
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+        console.error("Login Error:", err);
+        setPassword("");
+      }
     }
   };
 
