@@ -61,6 +61,19 @@
   background: #f0f7ff;
 }
 
+.navbuttons {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbuttons:hover {
+  transform: scale(1.1);
+  font-weight: bold;
+}
+
 .register-btn {
   padding: 6px 14px;
   border: none;

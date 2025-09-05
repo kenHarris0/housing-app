@@ -25,10 +25,12 @@ export default function Houses() {
     filteredHouses.sort((a, b) => b.price - a.price);
   } else if (sortType === "sizelowhigh") {
     filteredHouses.sort(
-      (a, b) => a.house_size.slice(0, -7) - b.house_size.slice(0, -7)
+      (a, b) => parseInt(a.house_size) - parseInt(b.house_size)
     );
   } else if (sortType === "sizehighlow") {
-    filteredHouses.sort((a, b) => b.house_size - a.house_size);
+    filteredHouses.sort(
+      (a, b) => parseInt(b.house_size) - parseInt(a.house_size)
+    );
   }
 
   return (
@@ -106,7 +108,7 @@ export default function Houses() {
           <ul>
             {filteredHouses.map((house, i) => (
               <li key={i} style={{ marginBottom: "8px" }}>
-                <strong>{house.house_type}</strong> — {house.price} —
+                <strong>{house.house_type}</strong> — ₹{house.price} —
                 {house.house_size}—{house.location} — {house.Status} —{" "}
                 {house.city}
               </li>

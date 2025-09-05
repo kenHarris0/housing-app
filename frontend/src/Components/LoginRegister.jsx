@@ -2,7 +2,8 @@
 import axios from "axios";
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Home from "./Home";
+import Navbar from "./Navbar";
+// import Home from "./Home";
 import "../loginregister.css";
 
 export default function LoginRegister() {
@@ -59,7 +60,7 @@ export default function LoginRegister() {
         navigate("/");
       } catch (err) {
         if (err.response && err.response.data.message) {
-          alert(err.response.data.message); // show backend error message
+          alert(err.response.data.message);
         } else {
           alert("Something went wrong. Please try again.");
         }
@@ -70,86 +71,92 @@ export default function LoginRegister() {
   };
 
   return signup ? (
-    <div>
-      <div className="login-container">
-        <button
-          onClick={handleSignup}
-          style={{
-            background: "none",
-            border: "none",
-            color: "blue",
-            cursor: "pointer",
-            textDecoration: "underline",
-          }}
-        >
-          Already a Customer, Login!
-        </button>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          value={name}
-          placeholder="Enter your name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="username">Email</label>
-        <input
-          type="email"
-          value={email}
-          placeholder="Enter the email address"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          value={password}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="phone-number">Phone Number</label>
-        <input
-          type="number"
-          value={phonenumber}
-          placeholder="Enter Phone Number"
-          onChange={(e) => setPhonenumber(e.target.value)}
-        />
-        <button className="login-btn" onClick={() => handleRegister()}>
-          Submit
-        </button>
+    <>
+      <Navbar />
+      <div>
+        <div className="login-container">
+          <button
+            onClick={handleSignup}
+            style={{
+              background: "none",
+              border: "none",
+              color: "blue",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+          >
+            Already a Customer, Login!
+          </button>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            value={name}
+            placeholder="Enter your name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="username">Email</label>
+          <input
+            type="email"
+            value={email}
+            placeholder="Enter the email address"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            value={password}
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <label htmlFor="phone-number">Phone Number</label>
+          <input
+            type="number"
+            value={phonenumber}
+            placeholder="Enter Phone Number"
+            onChange={(e) => setPhonenumber(e.target.value)}
+          />
+          <button className="login-btn" onClick={() => handleRegister()}>
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
-    <div>
-      <div className="login-container">
-        <button
-          onClick={handleSignup}
-          style={{
-            background: "none",
-            border: "none",
-            color: "blue",
-            cursor: "pointer",
-            textDecoration: "underline",
-          }}
-        >
-          New Here, Register!
-        </button>
-        <label htmlFor="username">UserName</label>
-        <input
-          type="email"
-          value={email}
-          placeholder="Enter the email address"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          value={password}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className="login-btn" onClick={() => handleLogin()}>
-          Submit
-        </button>
+    <>
+      <Navbar />
+      <div>
+        <div className="login-container">
+          <button
+            onClick={handleSignup}
+            style={{
+              background: "none",
+              border: "none",
+              color: "blue",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+          >
+            New Here, Register!
+          </button>
+          <label htmlFor="username">UserName</label>
+          <input
+            type="email"
+            value={email}
+            placeholder="Enter the email address"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            value={password}
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="login-btn" onClick={() => handleLogin()}>
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
