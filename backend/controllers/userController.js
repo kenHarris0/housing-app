@@ -1,23 +1,24 @@
-import express from "express";
 import userSchema from "../model/userSchema.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
 
-const router = express.Router();
+dotenv.config();
+
 
 // GET all users
-router.get("/", async (req, res) => {
+const user_get = async (req, res) => {
     try {
-        
         const users = await userSchema.find();
         res.send(users);
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
-});
+};
 
 // POST a new user
-router.post("/signup", async (req, res) => {
+const user_signup =  async (req, res) => {
     try {
         const { userName, password, contact, gender, address } = req.body;
         const existingUser = await userSchema.findOne({userName});
@@ -34,15 +35,14 @@ router.post("/signup", async (req, res) => {
             gender,
             address
         });
-        res.status(201).send("User created successfully");
 
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
     }
-});
+};
 
-router.post('/login', async(req, res) => {
+const user_login =  async(req, res) => {
     const {userName, password} = req.body;
 
     try{
@@ -55,11 +55,18 @@ router.post('/login', async(req, res) => {
         if(!passwordMatch){
             return res.status(401).send("Invalid Password");
         } 
-        res.status(200).send("Login Successfull");
+        const accessToken = jwt.sign({id : user._id, username : user.userName}, process.env.Access_Token);
+        res.status(200).json({accessToken: accessToken});
     }
     catch(err){
         res.status(500).send("Internal server Error");
+        console.error(err);
     }   
-});
+};
 
-export default router;
+
+export default {
+  user_get,
+  user_signup,
+  user_login
+};
